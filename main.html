@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Periodic Name Builder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.32/sweetalert2.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .input-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out;
+            transform-origin: top;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #646cff;
+            box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.2);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: #646cff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background: #4f56cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .element-box {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #646cff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 0.75rem 0.5rem;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e2e8f0 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .input-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out;
+            transform-origin: top;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #646cff;
+            box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.2);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            background: #646cff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            background: #4f56cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .element-box {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #646cff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 0.75rem 0.5rem;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popIn 0.5s ease-out forwards;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .element-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+            border-color: #4f56cc;
+        }
+
+        .element-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 200px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
+        }
+
+        .tooltip-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .tooltip-title {
+            font-weight: bold;
+            color: #646cff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .tooltip-info {
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .tooltip-property {
+            display: flex;
+            justify-content: space-between;
+            color: #ccc;
+        }
+
+        .tooltip-value {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Rest of the previous styles remain the same */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .element-box:nth-child(1) { animation-delay: 0s; }
+        .element-box:nth-child(2) { animation-delay: 0.1s; }
+        .element-box:nth-child(3) { animation-delay: 0.2s; }
+        .element-box:nth-child(4) { animation-delay: 0.3s; }
+        .element-box:nth-child(5) { animation-delay: 0.4s; }
+        .element-box:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Periodic Name Builder</h1>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="Enter a name..." maxlength="20">
+                <button onclick="checkName()">Check</button>
+            </div>
+        </div>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const elementDetails = {
+            'H': {
+                name: 'Hydrogen',
+                number: 1,
+                category: 'Nonmetal',
+                state: 'Gas',
+                weight: '1.008',
+                period: 1,
+                group: 1
+            },
+            // Add more element details here
+        };
+
+        const elements = {
+            'H': ['Hydrogen', 1, 'Colorless gas, most abundant element in the universe'],
+            'He': ['Helium', 2, 'Noble gas, used in balloons and cooling'],
+            'Li': ['Lithium', 3, 'Soft alkali metal, used in batteries'],
+            'Be': ['Beryllium', 4, 'Toxic alkaline earth metal'],
+            'B': ['Boron', 5, 'Semiconductor, used in fiberglass'],
+            'C': ['Carbon', 6, 'Basis for organic chemistry'],
+            'N': ['Nitrogen', 7, 'Colorless gas, 78% of atmosphere'],
+            'O': ['Oxygen', 8, 'Vital for life, 21% of atmosphere'],
+            'F': ['Fluorine', 9, 'Most reactive nonmetal'],
+            'Ne': ['Neon', 10, 'Noble gas, used in signs'],
+            'Na': ['Sodium', 11, 'Soft reactive metal, essential for life'],
+            'Mg': ['Magnesium', 12, 'Light metal, essential for plants'],
+            'Al': ['Aluminum', 13, 'Common light metal'],
+            'Si': ['Silicon', 14, 'Semiconductor, used in electronics'],
+            'P': ['Phosphorus', 15, 'Essential for life, used in fertilizers'],
+            'S': ['Sulfur', 16, 'Yellow nonmetal, volcanic element'],
+            'Cl': ['Chlorine', 17, 'Toxic green gas, used in water treatment'],
+            'Ar': ['Argon', 18, 'Noble gas, used in lighting'],
+            'K': ['Potassium', 19, 'Soft reactive metal, essential mineral'],
+            'Ca': ['Calcium', 20, 'Essential for bones and teeth'],
+            'Sc': ['Scandium', 21, 'Rare earth metal, used in aerospace'],
+            'Ti': ['Titanium', 22, 'Strong, lightweight metal'],
+            'V': ['Vanadium', 23, 'Used in steel alloys'],
+            'Cr': ['Chromium', 24, 'Shiny metal, used in stainless steel'],
+            'Mn': ['Manganese', 25, 'Used in steel production'],
+            'Fe': ['Iron', 26, 'Core of steel, essential for blood'],
+            'Co': ['Cobalt', 27, 'Used in batteries, blue pigments'],
+            'Ni': ['Nickel', 28, 'Corrosion-resistant metal'],
+            'Cu': ['Copper', 29, 'Used in wiring, essential mineral'],
+            'Zn': ['Zinc', 30, 'Used in galvanizing steel'],
+            'Ga': ['Gallium', 31, 'Melts in hand, used in electronics'],
+            'Ge': ['Germanium', 32, 'Semiconductor material'],
+            'As': ['Arsenic', 33, 'Toxic metalloid'],
+            'Se': ['Selenium', 34, 'Used in photocells'],
+            'Br': ['Bromine', 35, 'Red liquid, used in flame retardants'],
+            'Kr': ['Krypton', 36, 'Noble gas, used in lighting'],
+            'Rb': ['Rubidium', 37, 'Highly reactive alkali metal'],
+            'Sr': ['Strontium', 38, 'Used in fireworks'],
+            'Y': ['Yttrium', 39, 'Used in phosphors for LEDs'],
+            'Zr': ['Zirconium', 40, 'Corrosion-resistant metal'],
+            'Nb': ['Niobium', 41, 'Used in superconductors'],
+            'Mo': ['Molybdenum', 42, 'High-strength metal'],
+            'Tc': ['Technetium', 43, 'Radioactive, used in medicine'],
+            'Ru': ['Ruthenium', 44, 'Used in electrical contacts'],
+            'Rh': ['Rhodium', 45, 'Rare metal, used in catalytic converters'],
+            'Pd': ['Palladium', 46, 'Used in electronics and jewelry'],
+            'Ag': ['Silver', 47, 'Conductive metal, used in jewelry'],
+            'Cd': ['Cadmium', 48, 'Toxic, used in batteries'],
+            'In': ['Indium', 49, 'Used in touchscreens'],
+            'Sn': ['Tin', 50, 'Used in solder and plating'],
+            'Sb': ['Antimony', 51, 'Used in flame retardants'],
+            'Te': ['Tellurium', 52, 'Used in alloys and semiconductors'],
+            'I': ['Iodine', 53, 'Essential for thyroid function'],
+            'Xe': ['Xenon', 54, 'Noble gas, used in headlights'],
+            'Cs': ['Cesium', 55, 'Highly reactive alkali metal'],
+            'Ba': ['Barium', 56, 'Used in contrast X-rays'],
+            'La': ['Lanthanum', 57, 'Used in camera lenses'],
+            'Ce': ['Cerium', 58, 'Used in polishing powders'],
+            'Pr': ['Praseodymium', 59, 'Used in magnets'],
+            'Nd': ['Neodymium', 60, 'Used in powerful magnets'],
+            'Pm': ['Promethium', 61, 'Radioactive, used in batteries'],
+            'Sm': ['Samarium', 62, 'Used in magnets'],
+            'Eu': ['Europium', 63, 'Used in phosphors for screens'],
+            'Gd': ['Gadolinium', 64, 'Used in MRI contrast agents'],
+            'Tb': ['Terbium', 65, 'Used in green phosphors'],
+            'Dy': ['Dysprosium', 66, 'Used in magnets'],
+            'Ho': ['Holmium', 67, 'Used in magnets and lasers'],
+            'Er': ['Erbium', 68, 'Used in optical fibers'],
+            'Tm': ['Thulium', 69, 'Used in lasers'],
+            'Yb': ['Ytterbium', 70, 'Used in solar cells'],
+            'Lu': ['Lutetium', 71, 'Used in PET scanners'],
+            'Hf': ['Hafnium', 72, 'Used in nuclear reactors'],
+            'Ta': ['Tantalum', 73, 'Used in electronics'],
+            'W': ['Tungsten', 74, 'High melting point, used in filaments'],
+            'Re': ['Rhenium', 75, 'Used in jet engines'],
+            'Os': ['Osmium', 76, 'Dense metal, used in alloys'],
+            'Ir': ['Iridium', 77, 'Corrosion-resistant metal'],
+            'Pt': ['Platinum', 78, 'Used in jewelry and catalysts'],
+            'Au': ['Gold', 79, 'Precious metal, used in electronics'],
+            'Hg': ['Mercury', 80, 'Liquid metal, toxic'],
+            'Tl': ['Thallium', 81, 'Toxic metal, used in electronics'],
+            'Pb': ['Lead', 82, 'Toxic, used in batteries'],
+            'Bi': ['Bismuth', 83, 'Non-toxic heavy metal'],
+            'Po': ['Polonium', 84, 'Radioactive, used in anti-static devices'],
+            'At': ['Astatine', 85, 'Rare, radioactive halogen'],
+            'Rn': ['Radon', 86, 'Radioactive noble gas'],
+            'Fr': ['Francium', 87, 'Highly radioactive alkali metal'],
+            'Ra': ['Radium', 88, 'Radioactive, used in cancer treatment'],
+            'Ac': ['Actinium', 89, 'Radioactive, used in research'],
+            'Th': ['Thorium', 90, 'Used in nuclear fuel'],
+            'Pa': ['Protactinium', 91, 'Radioactive, used in research'],
+            'U': ['Uranium', 92, 'Used in nuclear reactors'],
+            'Np': ['Neptunium', 93, 'Radioactive, used in research'],
+            'Pu': ['Plutonium', 94, 'Used in nuclear weapons'],
+            'Am': ['Americium', 95, 'Used in smoke detectors'],
+            'Cm': ['Curium', 96, 'Radioactive, used in research'],
+            'Bk': ['Berkelium', 97, 'Radioactive, used in research'],
+            'Cf': ['Californium', 98, 'Used in neutron sources'],
+            'Es': ['Einsteinium', 99, 'Radioactive, synthetic'],
+            'Fm': ['Fermium', 100, 'Radioactive, synthetic'],
+            'Md': ['Mendelevium', 101, 'Radioactive, synthetic'],
+            'No': ['Nobelium', 102, 'Radioactive, synthetic'],
+            'Lr': ['Lawrencium', 103, 'Radioactive, synthetic'],
+            'Rf': ['Rutherfordium', 104, 'Radioactive, synthetic'],
+            'Db': ['Dubnium', 105, 'Radioactive, synthetic'],
+            'Sg': ['Seaborgium', 106, 'Radioactive, synthetic'],
+            'Bh': ['Bohrium', 107, 'Radioactive, synthetic'],
+            'Hs': ['Hassium', 108, 'Radioactive, synthetic'],
+            'Mt': ['Meitnerium', 109, 'Radioactive, synthetic'],
+            'Ds': ['Darmstadtium', 110, 'Radioactive, synthetic'],
+            'Rg': ['Roentgenium', 111, 'Radioactive, synthetic'],
+            'Cn': ['Copernicium', 112, 'Radioactive, synthetic'],
+            'Nh': ['Nihonium', 113, 'Radioactive, synthetic'],
+            'Fl': ['Flerovium', 114, 'Radioactive, synthetic'],
+            'Mc': ['Moscovium', 115, 'Radioactive, synthetic'],
+            'Lv': ['Livermorium', 116, 'Radioactive, synthetic'],
+            'Ts': ['Tennessine', 117, 'Radioactive, synthetic'],
+            'Og': ['Oganesson', 118, 'Radioactive, noble gas']
+        };
+        
+
+        function showTooltip(event, symbol) {
+            const box = event.currentTarget;
+            const tooltip = box.querySelector('.element-tooltip');
+            const rect = box.getBoundingClientRect();
+            
+            // Position tooltip above the element box
+            tooltip.style.bottom = '120%';
+            tooltip.style.left = '50%';
+            tooltip.style.transform = 'translateX(-50%)';
+            tooltip.style.opacity = '1';
+        }
+
+        function hideTooltip(event) {
+            const tooltip = event.currentTarget.querySelector('.element-tooltip');
+            tooltip.style.opacity = '0';
+        }
+
+        function canFormName(name) {
+            name = name.toLowerCase();
+            if (name.length === 0) return [];
+            
+            for (let element in elements) {
+                if (name.startsWith(element.toLowerCase())) {
+                    const remaining = name.slice(element.length);
+                    if (remaining.length === 0) return [element];
+                    
+                    const result = canFormName(remaining);
+                    if (result) return [element, ...result];
+                }
+            }
+            return null;
+        }
+
+        function checkName() {
+            const input = document.getElementById('nameInput').value;
+            const resultDiv = document.getElementById('result');
+            
+            if (!input) {
+                Swal.fire({
+                    title: 'Oops!',
+                    text: 'Please enter a name to check',
+                    icon: 'warning',
+                    confirmButtonColor: '#646cff'
+                });
+                return;
+            }
+            
+            resultDiv.innerHTML = '';
+            const result = canFormName(input);
+            
+            if (result) {
+                Swal.fire({
+                    title: 'Amazing!',
+                    text: `Your name "${input}" can be formed using ${result.length} periodic elements!`,
+                    icon: 'success',
+                    confirmButtonColor: '#646cff'
+                });
+                
+                result.forEach((symbol, index) => {
+                    const box = document.createElement('div');
+                    box.className = 'element-box';
+                    box.style.animationDelay = `${index * 0.1}s`;
+                    
+                    const numberSpan = document.createElement('span');
+                    numberSpan.className = 'element-number';
+                    numberSpan.textContent = elements[symbol][1];
+                    
+                    const symbolSpan = document.createElement('span');
+                    symbolSpan.className = 'element-symbol';
+                    symbolSpan.textContent = symbol;
+                    
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'element-name';
+                    nameSpan.textContent = elements[symbol][0];
+                    
+                    // Add tooltip
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'element-tooltip';
+                    tooltip.innerHTML = `
+                        <div class="tooltip-content">
+                            <div class="tooltip-title">${elements[symbol][0]} (${symbol})</div>
+                            <div class="tooltip-property">
+                                <span>Atomic Number:</span>
+                                <span class="tooltip-value">${elements[symbol][1]}</span>
+                            </div>
+                            <div class="tooltip-info">${elements[symbol][2]}</div>
+                        </div>
+                    `;
+                    
+                    box.appendChild(numberSpan);
+                    box.appendChild(symbolSpan);
+                    box.appendChild(nameSpan);
+                    box.appendChild(tooltip);
+                    
+                    // Add hover events
+                    box.addEventListener('mouseenter', (e) => showTooltip(e, symbol));
+                    box.addEventListener('mouseleave', hideTooltip);
+                    
+                    resultDiv.appendChild(box);
+                });
+            } else {
+                Swal.fire({
+                    title: 'Not Possible',
+                    text: `Unfortunately, "${input}" cannot be formed using periodic elements. Try another name!`,
+                    icon: 'error',
+                    confirmButtonColor: '#646cff',
+                    footer: 'Hint: Try names like "Clara" or "Francis"'
+                });
+            }
+        }
+
+        // Add event listener for Enter key
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkName();
+            }
+        });
+
+        // Initial welcome message
+        window.onload = function() {
+            Swal.fire({
+                title: 'Welcome to Periodic Name Builder!',
+                text: 'Enter your name and discover if it can be spelled using chemical elements!',
+                icon: 'info',
+                confirmButtonColor: '#646cff',
+                footer: 'Try names like "Clara" or "Francis"'
+            });
+        };
+    </script>
+</body>
+</html>
